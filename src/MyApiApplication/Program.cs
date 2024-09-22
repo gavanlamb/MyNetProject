@@ -1,6 +1,6 @@
 
 //using NLog.Extensions.Logging;
-using NLog.Web;
+//using NLog.Web;
 
 namespace MyApiApplication {
 	public class Program {
