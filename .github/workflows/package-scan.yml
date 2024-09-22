@@ -1,0 +1,58 @@
+name: .NET Package Scan
+run-name: Package scan
+on:
+  workflow_run:
+    pull_request:
+      branches: [ "master" ]
+
+env:
+    PROJECTS_PATH: 'src/'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        permissions:
+          contents: read
+          checks: write
+          pull-requests: write
+  
+        steps:
+        - name: Checkout repository  
+          uses: actions/checkout@v4
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 8.0.x
+        - name: Restore Dependencies
+          run: dotnet restore ${{ env.PROJECTS_PATH }}
+        - name: .Net Package vulnerability
+          uses: gavanlamb/.net-vulnerable@v1.0.0
+          with:
+            add-pr-comment: true
+            add-check-run: true
+            frameworks: net8.0
+            pr-comment-name: net8.0
+            target: ${{ env.PROJECTS_PATH }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: .Net Package Deprecation
+          uses: gavanlamb/.net-deprecated@v1.0.0
+          with:
+            add-pr-comment: true
+            add-check-run: true
+            frameworks: net8.0
+            pr-comment-name: net8.0
+            target: ${{ env.PROJECTS_PATH }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: .Net Package Outdated           
+          uses: gavanlamb/.net-outdated@v1.0.0
+          with:
+            add-pr-comment: true
+            add-check-run: true
+            frameworks: net8.0
+            pr-comment-name: net8.0
+            target: ${{ env.PROJECTS_PATH }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
