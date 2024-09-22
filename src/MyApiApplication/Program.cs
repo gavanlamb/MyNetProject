@@ -1,5 +1,5 @@
 
-using NLog.Extensions.Logging;
+//using NLog.Extensions.Logging;
 using NLog.Web;
 
 namespace MyApiApplication {
@@ -15,8 +15,8 @@ namespace MyApiApplication {
 			builder.Services.AddSwaggerGen();
 
 			builder.Logging.ClearProviders();
-			builder.Host.UseNLog();
-			builder.Services.AddSingleton<ILoggerProvider, NLogLoggerProvider>();
+			//builder.Host.UseNLog();
+			//builder.Services.AddSingleton<ILoggerProvider, NLogLoggerProvider>();
 
 			var app = builder.Build();
 
