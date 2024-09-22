@@ -1,0 +1,2 @@
+# MyNetProject
+Test .NET project
