@@ -1,7 +1,6 @@
 name: .NET Package Scan
 run-name: Package scan
 on:
-  workflow_run:
     pull_request:
       branches: [ "master" ]
 
