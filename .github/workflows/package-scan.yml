@@ -46,7 +46,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - name: .Net Package Outdated           
-          uses: gavanlamb/.net-outdated@v1.0.0
+          uses: gavanlamb/.net-outdated@v1.0.1
           with:
             add-pr-comment: true
             add-check-run: true
